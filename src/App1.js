@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Input1 from "./components/input1";
+import Todo1 from "./components/todo1";
 
-//props로 리펙토링
-function App() {
+function App1() {
   const inputRef = useRef("");
 
   const wrap = {
@@ -62,36 +63,16 @@ function App() {
   return (
     <div className="App" style={wrap}>
       <h1>TODO LIST</h1>
-      <form onSubmit={insertTodo}>
-        <input
-          type="text"
-          value={input}
-          ref={inputRef}
-          id="work"
-          placeholder="오늘의 할일"
-          onChange={handleChangeText}
-        />
-        <input type="submit" vlaue="Create" />
-      </form>
+      <Input1
+        insertTodo={insertTodo}
+        input={input}
+        inputRef={inputRef}
+        handleChangeText={handleChangeText}
+      />
 
-      {todos.map((todo) => {
-        return (
-          <div className="todo" key={todo.id}>
-            <h3>
-              <label
-                onClick={() => updateTodo(todo.id)}
-                className={todo.completed === 1 ? "completed" : null}
-              >
-                {todo.todoname}
-              </label>
-              &nbsp;&nbsp;
-              <button onClick={() => deleteTodo(todo.id)}>삭제</button>
-            </h3>
-          </div>
-        );
-      })}
+      <Todo1 todos={todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
     </div>
   );
 }
 
-export default App;
+export default App1;
